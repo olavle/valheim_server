@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  valheim:
+    image: lloesche/valheim-server:latest
+    container_name: valheim-server
+    ports:
+      - "2456-2458:2456-2458/udp"
+      - "27060:27060/udp"
+    environment:
+      # Server browser name
+      - SERVER_NAME=hullu_servu
+      # Name of the world without .db/.fwl file extension (eli worlds_local filut)
+      - WORLD_NAME=Dedicated
+      - PASSWORD=hello123
+      - SERVER_PORT=2456
+      # Näkyykö server browserissa
+      - SERVER_PUBLIC=true
+    volumes:
+      - ./world_data:/config/worlds_local
+    restart: unless-stopped
